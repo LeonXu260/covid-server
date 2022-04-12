@@ -9,10 +9,10 @@ const ncovChinaSchema = mongoose.Schema({
     },
   ],
   date: {
-      type: Date,
-      default: Date.now();
-  }
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-const ncovChinaData = mongoose.model('ncovChinaData', ncovChinaSchema);
+const ncovChinaData = mongoose.model("ncovChinaData", ncovChinaSchema);
 export default ncovChinaData;
