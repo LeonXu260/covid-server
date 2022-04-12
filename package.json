@@ -1,0 +1,35 @@
+{
+  "name": "covid-server",
+  "version": "1.0.0",
+  "description": "Backend server for COVID19 project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/leonxu260/covid-server.git"
+  },
+  "keywords": [
+    "COVID19",
+    "Backend"
+  ],
+  "author": "Leon Xu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/leonxu260/covid-server/issues"
+  },
+  "homepage": "https://gitlab.com/leonxu260/covid-server#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10",
+    "node-schedule": "^2.1.0",
+    "nodemon": "^2.0.15"
+  }
+}
