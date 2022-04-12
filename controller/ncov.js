@@ -64,3 +64,20 @@ export const ChinaData = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+// Get World Data method
+export const WorldData = async (req, res) => {
+  const { wapiAppid, wapiSign } = process.env;
+  const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
+  try {
+    axios.get(worldNcovUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      res.status(200).json(data);
+      // 写入获取数据到数据库
+      WorldNcovData.insertMany(parseData);
+    });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
