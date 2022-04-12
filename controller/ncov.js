@@ -1,6 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
-import path from "path";
+import path, { parse } from "path";
 
 dotenv.config({
   path: path.dirname("../.env"),
@@ -24,6 +24,24 @@ export const getChinaData = async (req, res) => {
       res.status(200).json(data);
       // 写入获取数据到数据库
       ncovChinaData.insertMany(parseData);
+    });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
+// Get Abroad Data method
+export const getAbroadData = async (req, res) => {
+  // 导入环境变量
+  const { tianapiKey } = process.env;
+  const ncovAbroadUrl = `http://api.tianapi.com/ncovabroad/index?key=${tianapiKey}`;
+  try {
+    axios.get(ncovAbroadUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      res.status(200).json(data);
+      // 写入获取数据到数据库
+      ncovAbroadData.insertMany(parseData);
     });
   } catch (error) {
     res.status(404).json({ message: error });
