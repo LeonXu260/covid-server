@@ -16,13 +16,14 @@ npm i
 ```
 
 ## Usage
-Currently, the server uses a package [Node Scheduler](https://www.npmjs.com/package/node-schedule) to fetch the data from the third party endpoints and store them in the database.
+The server currently fetches the data from the third-party api interfaces, display and stores them to the database. But I am implementing ways for the server to fetch the data and store to the database first, then display those data.
 
 ## Support
 Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
 ## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+- Currently, working on storing the data from the fetched endpoints to the database and display them to those api endpoints.
+- In the future, this server will use a package [Node Scheduler](https://www.npmjs.com/package/node-schedule) to fetch the data from the third party endpoints and store them in the database.
 
 ## Contributing
 State if you are open to contributions and what your requirements are for accepting them.
