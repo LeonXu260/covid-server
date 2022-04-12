@@ -6,6 +6,12 @@ dotenv.config({
   path: path.dirname("../.env"),
 });
 
+// 导入models文件
+import ncovChinaData from "../models/ncovChinaData.js";
+import ncovAbroadData from "../models/ncovAbroadData.js";
+import ChinaNcovData from "../models/ChinaData.js";
+import WorldNcovData from "../models/WorldData.js";
+
 // Get China Data method
 export const getChinaData = async (req, res) => {
   // 导入环境变量
