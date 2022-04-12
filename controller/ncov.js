@@ -47,3 +47,20 @@ export const getAbroadData = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+// Get China Data method
+export const ChinaData = async (req, res) => {
+  const { wapiAppid, wapiSign } = process.env;
+  const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
+  try {
+    axios.get(ChinaNcovUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      res.status(200).json(data);
+      // 写入获取数据到数据库
+      ChinaNcovData.insertMany(parseData);
+    });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
