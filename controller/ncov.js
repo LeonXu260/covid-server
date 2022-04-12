@@ -1,6 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
-import path, { parse } from "path";
+import path from "path";
 
 dotenv.config({
   path: path.dirname("../.env"),
@@ -11,6 +11,7 @@ import ncovChinaData from "../models/ncovChinaData.js";
 import ncovAbroadData from "../models/ncovAbroadData.js";
 import ChinaNcovData from "../models/ChinaData.js";
 import WorldNcovData from "../models/WorldData.js";
+import TravelData from "../models/TravelData.js";
 
 // Get China Data method
 export const getChinaData = async (req, res) => {
@@ -80,4 +81,19 @@ export const WorldData = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error });
   }
+};
+
+// Get Travel Data method
+export const TravelDataCity = async (req, res) => {
+  const { juhe } = process.env;
+  const travelUrl = `https://apis.juhe.cn/springTravel/citys?key=${juhe}`;
+  try {
+    axios.get(travelUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      res.status(200).json(data);
+      // 写入获取数据到数据库
+      TravelData.insertMany(parseData);
+    });
+  } catch (error) {}
 };
