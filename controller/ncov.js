@@ -23,6 +23,7 @@ export const getChinaData = async (req, res) => {
       let parseData = data;
       res.status(200).json(data);
       // 写入获取数据到数据库
+      ncovChinaData.insertMany(parseData);
     });
   } catch (error) {
     res.status(404).json({ message: error });
