@@ -22,6 +22,10 @@ app.use(cors());
 // Use middleware to connect
 app.use("/api", ncovRoute);
 
+// Create a public directory
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "./public")));
+
 // Setup body parser
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
