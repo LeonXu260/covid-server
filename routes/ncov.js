@@ -8,6 +8,7 @@ import {
   getImage,
   WorldData,
   TravelDataCity,
+  TravelPolicy
 } from "../controller/ncov.js";
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.get("/china", ChinaData);
 router.get("/world", WorldData);
 router.get("/image", getImage);
 router.get("/travel", TravelDataCity);
+router.get('/travelprevention', TravelPolicy)
 
 export default router;
