@@ -13,6 +13,7 @@ import ChinaNcovData from "../models/ChinaData.js";
 import WorldNcovData from "../models/WorldData.js";
 import ImageData from "../models/ImageData.js";
 import TravelData from "../models/TravelData.js";
+import TravelPreventionData from "../models/TravelPreventionData.js";
 
 // Get China Data method
 export const getChinaData = async (req, res) => {
@@ -115,3 +116,20 @@ export const TravelDataCity = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+// Get Travel Prevention Policies
+export const TravelPolicy = async (req, res) => {
+  const { juhe } = process.env;
+  const travelPreventionUrl = `https://http://apis.juhe.cn/springTravel/query?key=${juhe}&from=10191&to=10349`
+  try {
+    axios.get(travelPreventionUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      res.status(200).json(data);
+      // 写入获取数据到数据库
+      TravelPreventionData.insertMany(parseData);
+    })
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+}
