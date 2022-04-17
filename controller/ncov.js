@@ -120,7 +120,7 @@ export const TravelDataCity = async (req, res) => {
 // Get Travel Prevention Policies
 export const TravelPolicy = async (req, res) => {
   const { juhe } = process.env;
-  const travelPreventionUrl = `https://http://apis.juhe.cn/springTravel/query?key=${juhe}&from=10191&to=10349`
+  const travelPreventionUrl = `https://apis.juhe.cn/springTravel/query?key=${juhe}&from=10191&to=10349`
   try {
     axios.get(travelPreventionUrl).then((result) => {
       const { data } = result;
