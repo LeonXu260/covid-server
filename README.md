@@ -45,6 +45,7 @@ Special thanks to those Third-party API interface providers:
 - [Wapi挖数据 国外疫情数据](https://www.wapi.cn/api_detail/94/220.html)
 - [Wapi挖数据 国内城市疫情数据](https://www.wapi.cn/api_detail/94/221.html)
 - [Wapi挖数据 全球疫情数据](https://www.wapi.cn/api_detail/94/222.html)
+- [聚合数据 出行防疫政策指南](https://www.juhe.cn/docs/api/id/566)
 
 ## License
 For open source projects, say how it is licensed.
