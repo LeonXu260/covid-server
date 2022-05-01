@@ -24,8 +24,6 @@ export const getChinaData = async (req, res) => {
     axios.get(ncovChinaUrl).then((result) => {
       const { data } = result;
       let parseData = data;
-      res.status(200).json(data);
-      // 写入获取数据到数据库
       ncovChinaData.insertMany(parseData);
     });
   } catch (error) {
@@ -61,7 +59,7 @@ export const ChinaData = async (req, res) => {
       let parseData = data;
       res.status(200).json(data);
       // 写入获取数据到数据库
-      ChinaNcovData.insertMany(parseData);
+      const datas = ChinaNcovData.insertMany(parseData);
     });
   } catch (error) {
     res.status(404).json({ message: error });
@@ -125,7 +123,7 @@ export const TravelPolicy = async (req, res) => {
     axios.get(travelPreventionUrl).then((result) => {
       const { data } = result;
       let parseData = data;
-      res.status(200).json(data);
+      // res.status(200).json(data);
       // 写入获取数据到数据库
       TravelPreventionData.insertMany(parseData);
     })
