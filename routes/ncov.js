@@ -11,6 +11,8 @@ import {
   TravelPolicy
 } from "../controller/ncov.js";
 
+import {fetchAllChinaData, fetchIndividualChinaData} from '../controller/ncovFetchData.js'
+
 const router = express.Router();
 
 router.get("/", getChinaData);
@@ -20,5 +22,8 @@ router.get("/world", WorldData);
 router.get("/image", getImage);
 router.get("/travel", TravelDataCity);
 router.get('/travelprevention', TravelPolicy)
+
+router.get('/fetch', fetchAllChinaData);
+router.get('/fetch/one', fetchIndividualChinaData)
 
 export default router;
