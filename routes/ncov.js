@@ -15,7 +15,6 @@ import {
   fetchAllChinaData,
   fetchChinaData,
   fetchImageData,
-  fetchIndividualChinaData,
   fetchWorldData
 } from '../controller/ncovFetchData.js'
 
@@ -30,7 +29,6 @@ router.get("/travel", TravelDataCity);
 router.get('/travelprevention', TravelPolicy)
 
 router.get('/fetch', fetchAllChinaData);
-router.get('/fetch/one', fetchIndividualChinaData)
 router.get('/fetch/chart', fetchImageData);
 router.get('/fetch/china', fetchChinaData);
 router.get('/fetch/world', fetchWorldData);
