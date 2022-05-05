@@ -3,9 +3,10 @@ import ncovChinaData from "../models/ncovChinaData.js";
 import ChinaNcovData from '../models/ChinaData.js';
 import WorldNcovData from "../models/WorldData.js";
 import ImageData from "../models/ImageData.js";
+import ncovAbroadData from "../models/ncovAbroadData.js";
 
 // Fetch China Data method
-export const fetchAllChinaData = (req, res) => {
+export const fetchChinaData = (req, res) => {
     ncovChinaData.find().then(result => {
         res.send(result);
     }).catch(error => {
@@ -13,12 +14,12 @@ export const fetchAllChinaData = (req, res) => {
     });
 };
 
-// Fetch individual data method
-export const fetchIndividualChinaData = (req, res) => {
-    ncovChinaData.findById('626ef3242d047c1843308d5c').then(result => {
+// Fetch Abroad Data method
+export const fetchAbroadData = (req, res) => {
+    ncovAbroadData.find().then (result => {
         res.send(result);
     }).catch(error => {
-        res.status(404).json({message: error});
+        res.status(404).json({message: error})
     })
 }
 
