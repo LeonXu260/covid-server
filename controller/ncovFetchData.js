@@ -6,7 +6,7 @@ import ImageData from "../models/ImageData.js";
 import ncovAbroadData from "../models/ncovAbroadData.js";
 
 // Fetch China Data method
-export const fetchChinaData = (req, res) => {
+export const fetchAllChinaData = (req, res) => {
     ncovChinaData.find().then(result => {
         res.send(result);
     }).catch(error => {
