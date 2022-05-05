@@ -1,6 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import path from "path";
+import schedule from 'node-schedule'
 
 dotenv.config({
   path: path.dirname("../.env"),
@@ -20,67 +21,79 @@ export const getChinaData = async (req, res) => {
   // 导入环境变量
   const { tianapiKey } = process.env;
   const ncovChinaUrl = `https://api.tianapi.com/ncov/index?key=${tianapiKey}`;
-  try {
-    axios.get(ncovChinaUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      ncovChinaData.insertMany(parseData);
-    });
-  } catch (error) {
-    res.status(404).json({ message: error });
-  }
+  schedule.scheduleJob('fetch', '0 0 * * *', () => {
+    try {
+      axios.get(ncovChinaUrl).then((result) => {
+        const { data } = result;
+        let parseData = data;
+        ncovChinaData.insertMany(parseData);
+      });
+    } catch (error) {
+      res.status(404).json({ message: error });
+    }
+    schedule.cancelJob('fetch');
+  });
 };
 
 // Get Abroad Data method
 export const getAbroadData = async (req, res) => {
   // 导入环境变量
   const { tianapiKey } = process.env;
-  const ncovAbroadUrl = `http://api.tianapi.com/ncovabroad/index?key=${tianapiKey}`;
-  try {
-    axios.get(ncovAbroadUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      res.status(200).json(data);
-      // 写入获取数据到数据库
-      ncovAbroadData.insertMany(parseData);
-    });
-  } catch (error) {
-    res.status(404).json({ message: error });
-  }
+  const ncovAbroadUrl = `https://api.tianapi.com/ncovabroad/index?key=${tianapiKey}`;
+  schedule.scheduleJob('fetch', '0 0 * * *', () => {
+    try {
+      axios.get(ncovAbroadUrl).then((result) => {
+        const { data } = result;
+        let parseData = data;
+        res.status(200).json(data);
+        // 写入获取数据到数据库
+        ncovAbroadData.insertMany(parseData);
+      });
+    } catch (error) {
+      res.status(404).json({ message: error });
+    }
+    schedule.cancelJob('fetch');
+  })
 };
 
 // Get China Data method
 export const ChinaData = async (req, res) => {
   const { wapiAppid, wapiSign } = process.env;
   const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
-  try {
-    axios.get(ChinaNcovUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      res.status(200).json(data);
-      // 写入获取数据到数据库
-      const datas = ChinaNcovData.insertMany(parseData);
-    });
-  } catch (error) {
-    res.status(404).json({ message: error });
-  }
+  schedule.scheduleJob('fetch', '0 0 * * *', () => {
+    try {
+      axios.get(ChinaNcovUrl).then((result) => {
+        const { data } = result;
+        let parseData = data;
+        res.status(200).json(data);
+        // 写入获取数据到数据库
+        ChinaNcovData.insertMany(parseData);
+      });
+    } catch (error) {
+      res.status(404).json({ message: error });
+    }
+    schedule.cancelJob('fetch');
+  })
 };
 
 // Get World Data method
 export const WorldData = async (req, res) => {
   const { wapiAppid, wapiSign } = process.env;
   const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
-  try {
-    axios.get(worldNcovUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      res.status(200).json(data);
-      // 写入获取数据到数据库
-      WorldNcovData.insertMany(parseData);
-    });
-  } catch (error) {
-    res.status(404).json({ message: error });
-  }
+  schedule.scheduleJob('fetch', '0 0 * * *', () => {
+    try {
+      axios.get(worldNcovUrl).then((result) => {
+        const { data } = result;
+        let parseData = data;
+        res.status(200).json(data);
+        // 写入获取数据到数据库
+        WorldNcovData.insertMany(parseData);
+      });
+    } catch (error) {
+      res.status(404).json({ message: error });
+    }
+    schedule.scheduleJob('fetch');
+  })
 };
 
 // Get Image Data method
