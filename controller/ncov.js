@@ -24,6 +24,7 @@ export const fetchChinaData = schedule.scheduleJob("0 19 * * *", () => {
   axios.get(ncovChinaUrl).then((result) => {
     const { data } = result;
     let parseData = data;
+    // 写入获取数据到数据库
     let id = "62771a8a08a32d9172ebb0fa";
     ncovChinaData.findByIdAndUpdate(id, parseData);
   });
