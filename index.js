@@ -9,7 +9,12 @@ import path from "path";
 import dotenv from "dotenv";
 
 // Import files
-import ncov from './controller/ncov.js';
+import {
+  fetchChinaData,
+  fetchAbroadData,
+  ChinaData,
+  WorldData,
+} from "./controller/ncov.js";
 
 // Initialize dotenv
 dotenv.config();
@@ -34,7 +39,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 // Use ncov
-ncov.use('fetchChinaData');
+fetchChinaData, fetchAbroadData, ChinaData, WorldData;
 
 // Connecting to MongoDB
 mongoose
