@@ -36,7 +36,7 @@ export const fetchChinaData = schedule.scheduleJob(
 // Get Abroad Data method
 export const fetchAbroadData = schedule.scheduleJob(
   "fetchAbroadData",
-  "0 19 * * *",
+  "10 19 * * *",
   () => {
     // 导入环境变量
     const { tianapiKey } = process.env;
@@ -52,30 +52,38 @@ export const fetchAbroadData = schedule.scheduleJob(
 );
 
 // Get China Data method
-export const ChinaData = schedule.scheduleJob("ChinaData", "0 19 * * *", () => {
-  const { wapiAppid, wapiSign } = process.env;
-  const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
-  axios.get(ChinaNcovUrl).then((result) => {
-    const { data } = result;
-    let parseData = data;
-    // 写入获取数据到数据库
-    ChinaNcovData.insertMany(parseData);
-  });
-  schedule.cancelJob("ChinaData");
-});
+export const ChinaData = schedule.scheduleJob(
+  "ChinaData",
+  "15 19 * * *",
+  () => {
+    const { wapiAppid, wapiSign } = process.env;
+    const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
+    axios.get(ChinaNcovUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      // 写入获取数据到数据库
+      ChinaNcovData.insertMany(parseData);
+    });
+    schedule.cancelJob("ChinaData");
+  }
+);
 
 // Get World Data method
-export const WorldData = schedule.scheduleJob("WorldData", "0 19 * * *", () => {
-  const { wapiAppid, wapiSign } = process.env;
-  const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
-  axios.get(worldNcovUrl).then((result) => {
-    const { data } = result;
-    let parseData = data;
-    // 写入获取数据到数据库
-    WorldNcovData.insertMany(parseData);
-  });
-  schedule.scheduleJob("WorldData");
-});
+export const WorldData = schedule.scheduleJob(
+  "WorldData",
+  "20 19 * * *",
+  () => {
+    const { wapiAppid, wapiSign } = process.env;
+    const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
+    axios.get(worldNcovUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      // 写入获取数据到数据库
+      WorldNcovData.insertMany(parseData);
+    });
+    schedule.scheduleJob("WorldData");
+  }
+);
 
 // Get Image Data method
 export const getImage = async (req, res) => {
