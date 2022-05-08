@@ -6,8 +6,8 @@ import {
   fetchAbroadData,
   fetchChinaData,
   fetchImageData,
-  fetchWorldData
-} from '../controller/ncovFetchData.js'
+  fetchWorldData,
+} from "../controller/ncovFetchData.js";
 
 const router = express.Router();
 
