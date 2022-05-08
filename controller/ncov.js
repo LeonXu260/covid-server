@@ -17,69 +17,53 @@ import TravelData from "../models/TravelData.js";
 import TravelPreventionData from "../models/TravelPreventionData.js";
 
 // Get China Data method
-export const fetchChinaData = schedule.scheduleJob(
-  "fetchChinaData",
-  "0 19 * * *",
-  () => {
-    // 导入环境变量
-    const { tianapiKey } = process.env;
-    const ncovChinaUrl = `https://api.tianapi.com/ncov/index?key=${tianapiKey}`;
-    axios.get(ncovChinaUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      ncovChinaData.insertMany(parseData);
-    });
-  }
-);
+export const fetchChinaData = schedule.scheduleJob("0 19 * * *", () => {
+  // 导入环境变量
+  const { tianapiKey } = process.env;
+  const ncovChinaUrl = `https://api.tianapi.com/ncov/index?key=${tianapiKey}`;
+  axios.get(ncovChinaUrl).then((result) => {
+    const { data } = result;
+    let parseData = data;
+    ncovChinaData.insertMany(parseData);
+  });
+});
 
 // Get Abroad Data method
-export const fetchAbroadData = schedule.scheduleJob(
-  "fetchAbroadData",
-  "5 19 * * *",
-  () => {
-    // 导入环境变量
-    const { tianapiKey } = process.env;
-    const ncovAbroadUrl = `https://api.tianapi.com/ncovabroad/index?key=${tianapiKey}`;
-    axios.get(ncovAbroadUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      // 写入获取数据到数据库
-      ncovAbroadData.insertMany(parseData);
-    });
-  }
-);
+export const fetchAbroadData = schedule.scheduleJob("5 19 * * *", () => {
+  // 导入环境变量
+  const { tianapiKey } = process.env;
+  const ncovAbroadUrl = `https://api.tianapi.com/ncovabroad/index?key=${tianapiKey}`;
+  axios.get(ncovAbroadUrl).then((result) => {
+    const { data } = result;
+    let parseData = data;
+    // 写入获取数据到数据库
+    ncovAbroadData.insertMany(parseData);
+  });
+});
 
 // Get China Data method
-export const ChinaData = schedule.scheduleJob(
-  "ChinaData",
-  "10 19 * * *",
-  () => {
-    const { wapiAppid, wapiSign } = process.env;
-    const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
-    axios.get(ChinaNcovUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      // 写入获取数据到数据库
-      ChinaNcovData.insertMany(parseData);
-    });
-  }
-);
+export const ChinaData = schedule.scheduleJob("10 19 * * *", () => {
+  const { wapiAppid, wapiSign } = process.env;
+  const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
+  axios.get(ChinaNcovUrl).then((result) => {
+    const { data } = result;
+    let parseData = data;
+    // 写入获取数据到数据库
+    ChinaNcovData.insertMany(parseData);
+  });
+});
 
 // Get World Data method
-export const WorldData = schedule.scheduleJob(
-  "WorldData",
-  "15 19 * * *",
-  () => {
-    const { wapiAppid, wapiSign } = process.env;
-    const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
-    axios.get(worldNcovUrl).then((result) => {
-      const { data } = result;
-      let parseData = data;
-      // 写入获取数据到数据库
-      WorldNcovData.insertMany(parseData);
-    });
-  }
-);
+export const WorldData = schedule.scheduleJob("15 19 * * *", () => {
+  const { wapiAppid, wapiSign } = process.env;
+  const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
+  axios.get(worldNcovUrl).then((result) => {
+    const { data } = result;
+    let parseData = data;
+    // 写入获取数据到数据库
+    WorldNcovData.insertMany(parseData);
+  });
+});
 
 // Get Image Data method
 export const getImage = async (req, res) => {
