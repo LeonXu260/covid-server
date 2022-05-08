@@ -17,7 +17,7 @@ import TravelData from "../models/TravelData.js";
 import TravelPreventionData from "../models/TravelPreventionData.js";
 
 // Get China Data method
-schedule.scheduleJob('fetchChinaData', '0 0 * * *', () => {
+schedule.scheduleJob('fetchChinaData', '* * * * *', () => {
   // 导入环境变量
   const { tianapiKey } = process.env;
   const ncovChinaUrl = `https://api.tianapi.com/ncov/index?key=${tianapiKey}`;
