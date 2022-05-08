@@ -56,7 +56,6 @@ export const ChinaData = schedule.scheduleJob("10 19 * * *", () => {
     ChinaNcovData.findByIdAndUpdate(id, parseData);
   });
 });
-
 // Get World Data method
 export const WorldData = schedule.scheduleJob("15 19 * * *", () => {
   const { wapiAppid, wapiSign } = process.env;
@@ -110,7 +109,6 @@ export const TravelPolicy = async (req, res) => {
     axios.get(travelPreventionUrl).then((result) => {
       const { data } = result;
       let parseData = data;
-      // res.status(200).json(data);
       // 写入获取数据到数据库
       TravelPreventionData.insertMany(parseData);
     });
