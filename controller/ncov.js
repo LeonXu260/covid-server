@@ -29,14 +29,13 @@ export const fetchChinaData = schedule.scheduleJob(
       let parseData = data;
       ncovChinaData.insertMany(parseData);
     });
-    schedule.cancelJob("fetchChinaData");
   }
 );
 
 // Get Abroad Data method
 export const fetchAbroadData = schedule.scheduleJob(
   "fetchAbroadData",
-  "10 19 * * *",
+  "5 19 * * *",
   () => {
     // 导入环境变量
     const { tianapiKey } = process.env;
@@ -47,14 +46,13 @@ export const fetchAbroadData = schedule.scheduleJob(
       // 写入获取数据到数据库
       ncovAbroadData.insertMany(parseData);
     });
-    schedule.cancelJob("fetchAbroadData");
   }
 );
 
 // Get China Data method
 export const ChinaData = schedule.scheduleJob(
   "ChinaData",
-  "15 19 * * *",
+  "10 19 * * *",
   () => {
     const { wapiAppid, wapiSign } = process.env;
     const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
@@ -64,14 +62,13 @@ export const ChinaData = schedule.scheduleJob(
       // 写入获取数据到数据库
       ChinaNcovData.insertMany(parseData);
     });
-    schedule.cancelJob("ChinaData");
   }
 );
 
 // Get World Data method
 export const WorldData = schedule.scheduleJob(
   "WorldData",
-  "20 19 * * *",
+  "15 19 * * *",
   () => {
     const { wapiAppid, wapiSign } = process.env;
     const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
@@ -81,7 +78,6 @@ export const WorldData = schedule.scheduleJob(
       // 写入获取数据到数据库
       WorldNcovData.insertMany(parseData);
     });
-    schedule.scheduleJob("WorldData");
   }
 );
 
