@@ -1,7 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import path from "path";
-import schedule from 'node-schedule'
+import schedule from "node-schedule";
 
 dotenv.config({
   path: path.dirname("../.env"),
@@ -17,34 +17,42 @@ import TravelData from "../models/TravelData.js";
 import TravelPreventionData from "../models/TravelPreventionData.js";
 
 // Get China Data method
-schedule.scheduleJob('fetchChinaData', '* * * * *', () => {
-  // 导入环境变量
-  const { tianapiKey } = process.env;
-  const ncovChinaUrl = `https://api.tianapi.com/ncov/index?key=${tianapiKey}`;
-  axios.get(ncovChinaUrl).then((result) => {
-    const { data } = result;
-    let parseData = data;
-    ncovChinaData.insertMany(parseData);
-  });
-  schedule.cancelJob('fetchChinaData');
-});
+export const fetchChinaData = schedule.scheduleJob(
+  "fetchChinaData",
+  "0 19 * * *",
+  () => {
+    // 导入环境变量
+    const { tianapiKey } = process.env;
+    const ncovChinaUrl = `https://api.tianapi.com/ncov/index?key=${tianapiKey}`;
+    axios.get(ncovChinaUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      ncovChinaData.insertMany(parseData);
+    });
+    schedule.cancelJob("fetchChinaData");
+  }
+);
 
 // Get Abroad Data method
-schedule.scheduleJob('fetchAbroadData', '0 0 * * *', () => {
-  // 导入环境变量
-  const {tianapiKey} = process.env;
-  const ncovAbroadUrl = `https://api.tianapi.com/ncovabroad/index?key=${tianapiKey}`;
-  axios.get(ncovAbroadUrl).then((result) => {
-    const {data} = result;
-    let parseData = data;
-    // 写入获取数据到数据库
-    ncovAbroadData.insertMany(parseData);
-  })
-  schedule.cancelJob('fetchAbroadData');
-});
+export const fetchAbroadData = schedule.scheduleJob(
+  "fetchAbroadData",
+  "0 19 * * *",
+  () => {
+    // 导入环境变量
+    const { tianapiKey } = process.env;
+    const ncovAbroadUrl = `https://api.tianapi.com/ncovabroad/index?key=${tianapiKey}`;
+    axios.get(ncovAbroadUrl).then((result) => {
+      const { data } = result;
+      let parseData = data;
+      // 写入获取数据到数据库
+      ncovAbroadData.insertMany(parseData);
+    });
+    schedule.cancelJob("fetchAbroadData");
+  }
+);
 
 // Get China Data method
-schedule.scheduleJob('ChinaData', '0 0 * * *', () => {
+export const ChinaData = schedule.scheduleJob("ChinaData", "0 19 * * *", () => {
   const { wapiAppid, wapiSign } = process.env;
   const ChinaNcovUrl = `https://yupn.api.storeapi.net/api/94/219?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
   axios.get(ChinaNcovUrl).then((result) => {
@@ -53,11 +61,11 @@ schedule.scheduleJob('ChinaData', '0 0 * * *', () => {
     // 写入获取数据到数据库
     ChinaNcovData.insertMany(parseData);
   });
-  schedule.cancelJob('ChinaData');
-})
+  schedule.cancelJob("ChinaData");
+});
 
 // Get World Data method
-schedule.scheduleJob('WorldData', '0 0 * * *', () => {
+export const WorldData = schedule.scheduleJob("WorldData", "0 19 * * *", () => {
   const { wapiAppid, wapiSign } = process.env;
   const worldNcovUrl = `https://yupn.api.storeapi.net/api/94/220?format=json&appid=${wapiAppid}&sign=${wapiSign}`;
   axios.get(worldNcovUrl).then((result) => {
@@ -66,8 +74,8 @@ schedule.scheduleJob('WorldData', '0 0 * * *', () => {
     // 写入获取数据到数据库
     WorldNcovData.insertMany(parseData);
   });
-  schedule.scheduleJob('WorldData');
-})
+  schedule.scheduleJob("WorldData");
+});
 
 // Get Image Data method
 export const getImage = async (req, res) => {
@@ -104,7 +112,7 @@ export const TravelDataCity = async (req, res) => {
 // Get Travel Prevention Policies
 export const TravelPolicy = async (req, res) => {
   const { juhe } = process.env;
-  const travelPreventionUrl = `https://apis.juhe.cn/springTravel/query?key=${juhe}&from=10191&to=10349`
+  const travelPreventionUrl = `https://apis.juhe.cn/springTravel/query?key=${juhe}&from=10191&to=10349`;
   try {
     axios.get(travelPreventionUrl).then((result) => {
       const { data } = result;
@@ -112,8 +120,8 @@ export const TravelPolicy = async (req, res) => {
       // res.status(200).json(data);
       // 写入获取数据到数据库
       TravelPreventionData.insertMany(parseData);
-    })
+    });
   } catch (error) {
     res.status(404).json({ message: error });
   }
-}
+};
