@@ -56,6 +56,7 @@ export const ChinaData = schedule.scheduleJob("10 19 * * *", () => {
     ChinaNcovData.findByIdAndUpdate(id, parseData);
   });
 });
+
 // Get World Data method
 export const WorldData = schedule.scheduleJob("15 19 * * *", () => {
   const { wapiAppid, wapiSign } = process.env;
