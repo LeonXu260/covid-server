@@ -24,7 +24,8 @@ export const fetchChinaData = schedule.scheduleJob("0 19 * * *", () => {
   axios.get(ncovChinaUrl).then((result) => {
     const { data } = result;
     let parseData = data;
-    ncovChinaData.insertMany(parseData);
+    let id = "62771a8a08a32d9172ebb0fa";
+    ncovChinaData.findByIdAndUpdate(id, parseData);
   });
 });
 
@@ -36,8 +37,9 @@ export const fetchAbroadData = schedule.scheduleJob("5 19 * * *", () => {
   axios.get(ncovAbroadUrl).then((result) => {
     const { data } = result;
     let parseData = data;
+    let id = "627729c653361519aefa00c7";
     // 写入获取数据到数据库
-    ncovAbroadData.insertMany(parseData);
+    ncovAbroadData.findByIdAndUpdate(id, parseData);
   });
 });
 
@@ -48,8 +50,9 @@ export const ChinaData = schedule.scheduleJob("10 19 * * *", () => {
   axios.get(ChinaNcovUrl).then((result) => {
     const { data } = result;
     let parseData = data;
+    let id = "62772a0111c3c8ff365c5c65";
     // 写入获取数据到数据库
-    ChinaNcovData.insertMany(parseData);
+    ChinaNcovData.findByIdAndUpdate(id, parseData);
   });
 });
 
@@ -60,8 +63,9 @@ export const WorldData = schedule.scheduleJob("15 19 * * *", () => {
   axios.get(worldNcovUrl).then((result) => {
     const { data } = result;
     let parseData = data;
+    let id = "62772ab38e2bb6fb9795e6c1";
     // 写入获取数据到数据库
-    WorldNcovData.insertMany(parseData);
+    WorldNcovData.findByIdAndUpdate(id, parseData);
   });
 });
 
