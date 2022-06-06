@@ -2,9 +2,6 @@
 
 COVID server is a server that fetches data from the specific API interface that provide those data and store them to your desire database.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
 ## Visuals
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
@@ -34,9 +31,6 @@ You can also document commands to lint the code or run tests. These steps help t
 
 ## Authors and acknowledgment
 - [Leon Xu](https://gitlab.com/LeonXu260)
-
-Special thanks for the help from:
-- [Wong Chi Sum](https://github.com/wongshisum)
 
 Special thanks to those Third-party API interface providers:
 - [TianAPI 抗击疫情](https://www.tianapi.com/apiview/169)
